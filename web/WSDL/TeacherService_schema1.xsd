@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://service.users.upem.com/" xmlns:tns="http://service.users.upem.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="createTeacher" type="tns:createTeacher"/>
+
+  <xs:element name="deleteTeacher" type="tns:deleteTeacher"/>
+
+  <xs:element name="existsTeacher" type="tns:existsTeacher"/>
+
+  <xs:element name="existsTeacherResponse" type="tns:existsTeacherResponse"/>
+
+  <xs:element name="getAllTeachers" type="tns:getAllTeachers"/>
+
+  <xs:element name="getAllTeachersResponse" type="tns:getAllTeachersResponse"/>
+
+  <xs:element name="getTeacherByEmail" type="tns:getTeacherByEmail"/>
+
+  <xs:element name="getTeacherByEmailResponse" type="tns:getTeacherByEmailResponse"/>
+
+  <xs:element name="getTeacherByID" type="tns:getTeacherByID"/>
+
+  <xs:element name="getTeacherByIDResponse" type="tns:getTeacherByIDResponse"/>
+
+  <xs:element name="updateTeacher" type="tns:updateTeacher"/>
+
+  <xs:complexType name="existsTeacher">
+    <xs:sequence>
+      <xs:element name="teacher_id" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="existsTeacherResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTeacherByEmail">
+    <xs:sequence>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTeacherByEmailResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:teacher" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="teacher">
+    <xs:sequence>
+      <xs:element name="birth_date" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="first_name" type="xs:string" minOccurs="0"/>
+      <xs:element name="last_name" type="xs:string" minOccurs="0"/>
+      <xs:element name="teacher_id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTeacherByID">
+    <xs:sequence>
+      <xs:element name="teacher_id" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTeacherByIDResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:teacher" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAllTeachers">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getAllTeachersResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:teacher" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteTeacher">
+    <xs:sequence>
+      <xs:element name="teacher" type="tns:teacher" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateTeacher">
+    <xs:sequence>
+      <xs:element name="teacher" type="tns:teacher" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createTeacher">
+    <xs:sequence>
+      <xs:element name="teacher" type="tns:teacher" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

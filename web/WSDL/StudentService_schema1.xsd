@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://service.users.upem.com/" xmlns:tns="http://service.users.upem.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="createStudent" type="tns:createStudent"/>
+
+  <xs:element name="deleteStudent" type="tns:deleteStudent"/>
+
+  <xs:element name="existsStudent" type="tns:existsStudent"/>
+
+  <xs:element name="existsStudentResponse" type="tns:existsStudentResponse"/>
+
+  <xs:element name="getAllStudents" type="tns:getAllStudents"/>
+
+  <xs:element name="getAllStudentsResponse" type="tns:getAllStudentsResponse"/>
+
+  <xs:element name="getStudentByEmail" type="tns:getStudentByEmail"/>
+
+  <xs:element name="getStudentByEmailResponse" type="tns:getStudentByEmailResponse"/>
+
+  <xs:element name="getStudentByID" type="tns:getStudentByID"/>
+
+  <xs:element name="getStudentByIDResponse" type="tns:getStudentByIDResponse"/>
+
+  <xs:element name="updateStudent" type="tns:updateStudent"/>
+
+  <xs:complexType name="updateStudent">
+    <xs:sequence>
+      <xs:element name="student" type="tns:student" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="student">
+    <xs:sequence>
+      <xs:element name="birth_date" type="xs:string" minOccurs="0"/>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+      <xs:element name="first_name" type="xs:string" minOccurs="0"/>
+      <xs:element name="last_name" type="xs:string" minOccurs="0"/>
+      <xs:element name="student_id" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAllStudents">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getAllStudentsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:student" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getStudentByID">
+    <xs:sequence>
+      <xs:element name="student_id" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getStudentByIDResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:student" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createStudent">
+    <xs:sequence>
+      <xs:element name="student" type="tns:student" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteStudent">
+    <xs:sequence>
+      <xs:element name="student" type="tns:student" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getStudentByEmail">
+    <xs:sequence>
+      <xs:element name="email" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getStudentByEmailResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:student" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="existsStudent">
+    <xs:sequence>
+      <xs:element name="student_id" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="existsStudentResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
