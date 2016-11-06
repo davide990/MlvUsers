@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundleTeachers.CreateTeacherTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_teacher_id}" for="teacher_id" />
+                    <h:inputText id="teacher_id" value="#{teacherController.selected.teacher_id}" title="#{bundleTeachers.CreateTeacherTitle_teacher_id}" required="true" requiredMessage="#{bundleTeachers.CreateTeacherRequiredMessage_teacher_id}"/>
+                    <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_first_name}" for="first_name" />
+                    <h:inputText id="first_name" value="#{teacherController.selected.first_name}" title="#{bundleTeachers.CreateTeacherTitle_first_name}" />
+                    <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_last_name}" for="last_name" />
+                    <h:inputText id="last_name" value="#{teacherController.selected.last_name}" title="#{bundleTeachers.CreateTeacherTitle_last_name}" />
+                    <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_email}" for="email" />
+                    <h:inputText id="email" value="#{teacherController.selected.email}" title="#{bundleTeachers.CreateTeacherTitle_email}" />
+                    <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_birth_date}" for="birth_date" />
+                    <h:inputText id="birth_date" value="#{teacherController.selected.birth_date}" title="#{bundleTeachers.CreateTeacherTitle_birth_date}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{teacherController.create}" value="#{bundleTeachers.CreateTeacherSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{teacherController.prepareList}" value="#{bundleTeachers.CreateTeacherShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundleTeachers.CreateTeacherIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,6 +1,7 @@
 package com.upem.users.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class Teacher implements Serializable {
     private String email;
 
     @Column(name = "birth_date")
-    private String birth_date;
+    private Date birth_date;
 
     public long getTeacher_id() {
         return teacher_id;
@@ -70,11 +71,11 @@ public class Teacher implements Serializable {
         this.email = email;
     }
 
-    public String getBirth_date() {
+    public Date getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(String birth_date) {
+    public void setBirth_date(Date birth_date) {
         this.birth_date = birth_date;
     }
 
