@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.upem.users.students.jpa;
+package jpa.com.upem.mlvUsers.teachers;
 
-import com.upem.users.entities.Student;
+import com.upem.users.entities.Teacher;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Davide Andrea Guastella <davide.guastella90@gmail.com>
  */
 @Stateless
-public class StudentFacade extends AbstractFacade<Student> {
+public class TeacherFacade extends AbstractFacade<Teacher> {
 
     @PersistenceContext(unitName = "MlvUsersPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class StudentFacade extends AbstractFacade<Student> {
         return em;
     }
 
-    public StudentFacade() {
-        super(Student.class);
+    public TeacherFacade() {
+        super(Teacher.class);
     }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.upem.users.students.jpa;
+package jpa.com.upem.mlvUsers.teachers;
 
 import java.util.List;
 import javax.persistence.EntityManager;

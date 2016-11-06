@@ -22,9 +22,15 @@
                     <h:dataTable value="#{teacherController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundleTeachers.ListTeacherTitle_teacher_id}"/>
+                                <h:outputText value="#{bundleTeachers.ListTeacherTitle_type}"/>
                             </f:facet>
-                            <h:outputText value="#{item.teacher_id}"/>
+                            <h:outputText value="#{item.type}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleTeachers.ListTeacherTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -48,7 +54,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundleTeachers.ListTeacherTitle_birth_date}"/>
                             </f:facet>
-                            <h:outputText value="#{item.birth_date}"/>
+                            <h:outputText value="#{item.birth_date}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

@@ -27,7 +27,7 @@ public class StudentDAO {
             - Insert a new register to the database
             - Attach the object to the entity manager.
          */
-        logger.log(Level.INFO, "Adding student ID: " + student.getStudent_id());
+        logger.log(Level.INFO, "Adding student ID: " + student.getId());
         em.persist(student);
 
     }
@@ -38,24 +38,24 @@ public class StudentDAO {
             - If exists update and return the already attached object.
             - If doesn't exist insert the new register to the database.
          */
-        logger.log(Level.INFO, "Updating student ID: " + student.getStudent_id());
+        logger.log(Level.INFO, "Updating student ID: " + student.getId());
         em.merge(student);
 
     }
 
     public void deleteStudent(Student student) {
-        logger.log(Level.INFO, "Deleting student ID: " + student.getStudent_id());
+        logger.log(Level.INFO, "Deleting student ID: " + student.getId());
         em.remove(student);
     }
 
     public List<Student> getAllStudents() {
-        TypedQuery<Student> q = em.createQuery("select e from student e", Student.class);
+        TypedQuery<Student> q = em.createQuery("select e from Student e", Student.class);
         return q.getResultList();
     }
 
     public Student getStudentByID(int student_id) {
         Student s;
-        TypedQuery<Student> q = em.createQuery("select e from student e where e.student_id = '" + student_id + "'", Student.class);
+        TypedQuery<Student> q = em.createQuery("select e from Student e where e.student_id = '" + student_id + "'", Student.class);
 
         try {
             s = q.getSingleResult();
@@ -68,7 +68,7 @@ public class StudentDAO {
 
     public Student getStudentByEmail(String email) {
         Student s;
-        TypedQuery<Student> q = em.createQuery("select e from student e where e.email = '" + email + "'", Student.class);
+        TypedQuery<Student> q = em.createQuery("select e from Student e where e.email = '" + email + "'", Student.class);
 
         try {
             s = q.getSingleResult();

@@ -12,5 +12,13 @@
             <base-name>/BundleTeachers</base-name>
             <var>bundleTeachers</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleStudents</base-name>
+            <var>bundleStudents</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleTeachers</base-name>
+            <var>bundleTeachers</var>
+        </resource-bundle>
     </application>
 </faces-config>

@@ -15,8 +15,10 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundleStudents.EditStudentLabel_student_id}" for="student_id" />
-                    <h:inputText id="student_id" value="#{studentController.selected.student_id}" title="#{bundleStudents.EditStudentTitle_student_id}" required="true" requiredMessage="#{bundleStudents.EditStudentRequiredMessage_student_id}"/>
+                    <h:outputLabel value="#{bundleStudents.EditStudentLabel_type}" for="type" />
+                    <h:inputText id="type" value="#{studentController.selected.type}" title="#{bundleStudents.EditStudentTitle_type}" />
+                    <h:outputLabel value="#{bundleStudents.EditStudentLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{studentController.selected.id}" title="#{bundleStudents.EditStudentTitle_id}" required="true" requiredMessage="#{bundleStudents.EditStudentRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_first_name}" for="first_name" />
                     <h:inputText id="first_name" value="#{studentController.selected.first_name}" title="#{bundleStudents.EditStudentTitle_first_name}" />
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_last_name}" for="last_name" />
@@ -24,7 +26,9 @@
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_email}" for="email" />
                     <h:inputText id="email" value="#{studentController.selected.email}" title="#{bundleStudents.EditStudentTitle_email}" />
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_birth_date}" for="birth_date" />
-                    <h:inputText id="birth_date" value="#{studentController.selected.birth_date}" title="#{bundleStudents.EditStudentTitle_birth_date}" />
+                    <h:inputText id="birth_date" value="#{studentController.selected.birth_date}" title="#{bundleStudents.EditStudentTitle_birth_date}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
                 </h:panelGrid>
                 <h:commandLink action="#{studentController.update}" value="#{bundleStudents.EditStudentSaveLink}"/>
                 <br />

@@ -27,7 +27,7 @@ public class TeacherDAO {
             - Insert a new register to the database
             - Attach the object to the entity manager.
          */
-        logger.log(Level.INFO, "Adding teacher ID: " + teacher.getTeacher_id());
+        logger.log(Level.INFO, "Adding teacher ID: " + teacher.getId());
         em.persist(teacher);
 
     }
@@ -38,13 +38,13 @@ public class TeacherDAO {
             - If exists update and return the already attached object.
             - If doesn't exist insert the new register to the database.
          */
-        logger.log(Level.INFO, "Updating teacher ID: " + teacher.getTeacher_id());
+        logger.log(Level.INFO, "Updating teacher ID: " + teacher.getId());
         em.merge(teacher);
 
     }
 
     public void deleteTeacher(Teacher teacher) {
-        logger.log(Level.INFO, "Deleting teacher ID: " + teacher.getTeacher_id());
+        logger.log(Level.INFO, "Deleting teacher ID: " + teacher.getId());
         em.remove(teacher);
     }
 

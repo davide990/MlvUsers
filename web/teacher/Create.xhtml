@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
@@ -14,9 +15,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_teacher_id}" for="teacher_id" />
-                    <h:inputText id="teacher_id" value="#{teacherController.selected.teacher_id}" title="#{bundleTeachers.CreateTeacherTitle_teacher_id}" required="true" requiredMessage="#{bundleTeachers.CreateTeacherRequiredMessage_teacher_id}"/>
+                <p:panelGrid columns="2">
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_first_name}" for="first_name" />
                     <h:inputText id="first_name" value="#{teacherController.selected.first_name}" title="#{bundleTeachers.CreateTeacherTitle_first_name}" />
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_last_name}" for="last_name" />
@@ -24,8 +23,8 @@
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_email}" for="email" />
                     <h:inputText id="email" value="#{teacherController.selected.email}" title="#{bundleTeachers.CreateTeacherTitle_email}" />
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_birth_date}" for="birth_date" />
-                    <h:inputText id="birth_date" value="#{teacherController.selected.birth_date}" title="#{bundleTeachers.CreateTeacherTitle_birth_date}" />
-                </h:panelGrid>
+                    <p:calendar  id="birth_date" value="#{teacherController.selected.birth_date}" showOn="button" title="#{bundleTeachers.CreateTeacherTitle_birth_date}"/>
+                </p:panelGrid>
                 <br />
                 <h:commandLink action="#{teacherController.create}" value="#{bundleTeachers.CreateTeacherSaveLink}" />
                 <br />

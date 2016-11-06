@@ -1,8 +1,9 @@
-package com.upem.users.students.jpa;
+package jsf.com.upem.mlvUsers.students;
 
 import com.upem.users.entities.Student;
-import com.upem.users.students.jsf.JsfUtil;
-import com.upem.users.students.jsf.PaginationHelper;
+import jsf.com.upem.mlvUsers.students.util.JsfUtil;
+import jsf.com.upem.mlvUsers.students.util.PaginationHelper;
+import jpa.com.upem.mlvUsers.students.StudentFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -24,7 +25,7 @@ public class StudentController implements Serializable {
     private Student current;
     private DataModel items = null;
     @EJB
-    private com.upem.users.students.jpa.StudentFacade ejbFacade;
+    private jpa.com.upem.mlvUsers.students.StudentFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -223,7 +224,7 @@ public class StudentController implements Serializable {
             }
             if (object instanceof Student) {
                 Student o = (Student) object;
-                return getStringKey(o.getStudent_id());
+                return getStringKey(o.getId());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Student.class.getName());
             }

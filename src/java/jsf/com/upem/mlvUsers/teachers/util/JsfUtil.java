@@ -1,4 +1,4 @@
-package com.upem.users.students.jsf;
+package jsf.com.upem.mlvUsers.teachers.util;
 
 import java.util.List;
 import javax.faces.application.FacesMessage;

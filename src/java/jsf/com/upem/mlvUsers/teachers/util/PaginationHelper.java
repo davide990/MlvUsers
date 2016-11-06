@@ -1,4 +1,4 @@
-package com.upem.users.teachers.jsf.util;
+package jsf.com.upem.mlvUsers.teachers.util;
 
 import javax.faces.model.DataModel;
 

@@ -15,8 +15,10 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="#{bundleStudents.ViewStudentLabel_student_id}"/>
-                    <h:outputText value="#{studentController.selected.student_id}" title="#{bundleStudents.ViewStudentTitle_student_id}"/>
+                    <h:outputText value="#{bundleStudents.ViewStudentLabel_type}"/>
+                    <h:outputText value="#{studentController.selected.type}" title="#{bundleStudents.ViewStudentTitle_type}"/>
+                    <h:outputText value="#{bundleStudents.ViewStudentLabel_id}"/>
+                    <h:outputText value="#{studentController.selected.id}" title="#{bundleStudents.ViewStudentTitle_id}"/>
                     <h:outputText value="#{bundleStudents.ViewStudentLabel_first_name}"/>
                     <h:outputText value="#{studentController.selected.first_name}" title="#{bundleStudents.ViewStudentTitle_first_name}"/>
                     <h:outputText value="#{bundleStudents.ViewStudentLabel_last_name}"/>
@@ -24,7 +26,9 @@
                     <h:outputText value="#{bundleStudents.ViewStudentLabel_email}"/>
                     <h:outputText value="#{studentController.selected.email}" title="#{bundleStudents.ViewStudentTitle_email}"/>
                     <h:outputText value="#{bundleStudents.ViewStudentLabel_birth_date}"/>
-                    <h:outputText value="#{studentController.selected.birth_date}" title="#{bundleStudents.ViewStudentTitle_birth_date}"/>
+                    <h:outputText value="#{studentController.selected.birth_date}" title="#{bundleStudents.ViewStudentTitle_birth_date}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{studentController.destroyAndView}" value="#{bundleStudents.ViewStudentDestroyLink}"/>
