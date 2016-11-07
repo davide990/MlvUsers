@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,6 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "teacher")
 @XmlRootElement
 @DiscriminatorValue("teacher")
+@PrimaryKeyJoinColumn(name="id")
 public class Teacher extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;

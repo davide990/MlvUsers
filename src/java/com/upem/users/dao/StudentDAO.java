@@ -1,6 +1,8 @@
 package com.upem.users.dao;
 
+import com.upem.users.entities.Person;
 import com.upem.users.entities.Student;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,6 +11,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 
 /**
  *
@@ -49,16 +58,39 @@ public class StudentDAO {
     }
 
     public List<Student> getAllStudents() {
-        TypedQuery<Student> q = em.createQuery("select e from Student e", Student.class);
-        return q.getResultList();
+
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Person> person = builder.createQuery(Person.class);
+        
+        //THIS KIND OF QUERY IS NECESSARY SINCE PERSON AND STUDENT ARE IN INHERITANCE RELATIONSHIP
+        //JOIN CANNOT BE DONE
+        Root<Person> personRoot = person.from(Person.class); //ROOT
+        Root<Student> studentRoot = builder.treat(personRoot, Student.class);   //SUBCLASS
+
+        Predicate pd = builder.equal(studentRoot.get("id"), personRoot.get("id"));
+
+        person.select(personRoot).where(pd);
+
+        TypedQuery<Person> pp = em.createQuery(person);
+
+        List<Person> rl = pp.getResultList();
+        List<Student> sl = new ArrayList<>();
+        rl.stream().forEach((p) -> {
+            sl.add((Student) p);
+        });
+
+        return sl;
+
     }
 
     public Student getStudentByID(int student_id) {
         Student s;
-        TypedQuery<Student> q = em.createQuery("select e from Student e where e.student_id = '" + student_id + "'", Student.class);
+        //TypedQuery<Student> q = em.createQuery("select e from Student e where e.student_id = '" + student_id + "'", Student.class);
+        TypedQuery<Person> q = em.createQuery("SELECT p FROM Person p WHERE p.class='Student' AND p.id='" + student_id + "'", Person.class);
 
+        //TypedQuery<Student> q = em.createQuery("SELECT s FROM Student s Person p JOIN s.id p WHERE s.id = '" + student_id + "'", Student.class);
         try {
-            s = q.getSingleResult();
+            s = (Student) q.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }

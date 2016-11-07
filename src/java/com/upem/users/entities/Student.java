@@ -3,6 +3,8 @@ package com.upem.users.entities;
 import java.io.Serializable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "student")
 @XmlRootElement
 @DiscriminatorValue("student")
+@PrimaryKeyJoinColumn(name="id")
 public class Student extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
