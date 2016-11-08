@@ -24,4 +24,5 @@ public class Student extends Person implements Serializable {
     public UserType getType() {
         return UserType.STUDENT;
     }
+    
 }

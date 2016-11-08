@@ -61,7 +61,7 @@ public class StudentDAO {
 
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Person> person = builder.createQuery(Person.class);
-        
+
         //THIS KIND OF QUERY IS NECESSARY SINCE PERSON AND STUDENT ARE IN INHERITANCE RELATIONSHIP
         //JOIN CANNOT BE DONE
         Root<Person> personRoot = person.from(Person.class); //ROOT
@@ -83,35 +83,39 @@ public class StudentDAO {
 
     }
 
-    public Student getStudentByID(int student_id) {
-        Student s;
-        //TypedQuery<Student> q = em.createQuery("select e from Student e where e.student_id = '" + student_id + "'", Student.class);
-        TypedQuery<Person> q = em.createQuery("SELECT p FROM Person p WHERE p.class='Student' AND p.id='" + student_id + "'", Person.class);
+    public Student getStudentByID(long student_id) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Person> person = builder.createQuery(Person.class);
 
-        //TypedQuery<Student> q = em.createQuery("SELECT s FROM Student s Person p JOIN s.id p WHERE s.id = '" + student_id + "'", Student.class);
-        try {
-            s = (Student) q.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+        Root<Person> personRoot = person.from(Person.class); //ROOT
+        Root<Student> studentRoot = builder.treat(personRoot, Student.class);   //SUBCLASS
 
-        return s;
+        Predicate pd_1 = builder.equal(studentRoot.get("id"), personRoot.get("id"));
+        Predicate pd_2 = builder.equal(studentRoot.get("id"), student_id);
+        Predicate pd_3 = builder.and(pd_1, pd_2);
+
+        person.select(personRoot).where(pd_3);
+        TypedQuery<Person> pp = em.createQuery(person);
+        return (Student) pp.getSingleResult();
     }
 
     public Student getStudentByEmail(String email) {
-        Student s;
-        TypedQuery<Student> q = em.createQuery("select e from Student e where e.email = '" + email + "'", Student.class);
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Person> person = builder.createQuery(Person.class);
 
-        try {
-            s = q.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+        Root<Person> personRoot = person.from(Person.class); //ROOT
+        Root<Student> studentRoot = builder.treat(personRoot, Student.class);   //SUBCLASS
 
-        return s;
+        Predicate pd_1 = builder.equal(studentRoot.get("id"), personRoot.get("id"));
+        Predicate pd_2 = builder.equal(studentRoot.get("email"), email);
+        Predicate pd_3 = builder.and(pd_1, pd_2);
+
+        person.select(personRoot).where(pd_3);
+        TypedQuery<Person> pp = em.createQuery(person);
+        return (Student) pp.getSingleResult();
     }
 
-    public boolean existsStudent(int student_id) {
+    public boolean existsStudent(long student_id) {
         return getStudentByID(student_id) != null;
     }
 

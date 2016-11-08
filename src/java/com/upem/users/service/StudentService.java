@@ -43,7 +43,7 @@ public class StudentService {
     }
 
     @WebMethod(operationName = "getStudentByID")
-    public Student getStudentByID(@WebParam(name = "student_id") int student_id) {
+    public Student getStudentByID(@WebParam(name = "student_id") long student_id) {
         return ejbRef.getStudentByID(student_id);
     }
 
@@ -53,7 +53,7 @@ public class StudentService {
     }
 
     @WebMethod(operationName = "existsStudent")
-    public boolean existsStudent(@WebParam(name = "student_id") int student_id) {
+    public boolean existsStudent(@WebParam(name = "student_id") long student_id) {
         return ejbRef.existsStudent(student_id);
     }
 

@@ -1,6 +1,9 @@
 package com.upem.users.dao;
 
+import com.upem.users.entities.Person;
+import com.upem.users.entities.Student;
 import com.upem.users.entities.Teacher;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,6 +12,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -49,37 +56,62 @@ public class TeacherDAO {
     }
 
     public List<Teacher> getAllTeachers() {
-        TypedQuery<Teacher> q = em.createQuery("select e from teacher e", Teacher.class);
-        return q.getResultList();
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Person> person = builder.createQuery(Person.class);
+
+        //THIS KIND OF QUERY IS NECESSARY SINCE PERSON AND STUDENT ARE IN INHERITANCE RELATIONSHIP
+        //JOIN CANNOT BE DONE
+        Root<Person> personRoot = person.from(Person.class); //ROOT
+        Root<Teacher> teacherRoot = builder.treat(personRoot, Teacher.class);   //SUBCLASS
+
+        Predicate pd = builder.equal(teacherRoot.get("id"), personRoot.get("id"));
+
+        person.select(personRoot).where(pd);
+
+        TypedQuery<Person> pp = em.createQuery(person);
+
+        List<Person> rl = pp.getResultList();
+        List<Teacher> sl = new ArrayList<>();
+        rl.stream().forEach((p) -> {
+            sl.add((Teacher) p);
+        });
+
+        return sl;
     }
 
-    public Teacher getTeacherByID(int teacher_id) {
-        Teacher s;
-        TypedQuery<Teacher> q = em.createQuery("select e from teacher e where e.teacher_id = '" + teacher_id + "'", Teacher.class);
+    public Teacher getTeacherByID(long teacher_id) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Person> person = builder.createQuery(Person.class);
 
-        try {
-            s = q.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+        Root<Person> personRoot = person.from(Person.class); //ROOT
+        Root<Teacher> studentRoot = builder.treat(personRoot, Teacher.class);   //SUBCLASS
 
-        return s;
+        Predicate pd_1 = builder.equal(studentRoot.get("id"), personRoot.get("id"));
+        Predicate pd_2 = builder.equal(studentRoot.get("id"), teacher_id);
+        Predicate pd_3 = builder.and(pd_1, pd_2);
+
+        person.select(personRoot).where(pd_3);
+        TypedQuery<Person> pp = em.createQuery(person);
+        return (Teacher) pp.getSingleResult();
     }
 
     public Teacher getTeacherByEmail(String email) {
-        Teacher s;
-        TypedQuery<Teacher> q = em.createQuery("select e from teacher e where e.email = '" + email + "'", Teacher.class);
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Person> person = builder.createQuery(Person.class);
 
-        try {
-            s = q.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+        Root<Person> personRoot = person.from(Person.class); //ROOT
+        Root<Student> studentRoot = builder.treat(personRoot, Student.class);   //SUBCLASS
 
-        return s;
+        Predicate pd_1 = builder.equal(studentRoot.get("id"), personRoot.get("id"));
+        Predicate pd_2 = builder.equal(studentRoot.get("email"), email);
+        Predicate pd_3 = builder.and(pd_1, pd_2);
+
+        person.select(personRoot).where(pd_3);
+        TypedQuery<Person> pp = em.createQuery(person);
+        return (Teacher) pp.getSingleResult();
     }
 
-    public boolean existsTeacher(int teacher_id) {
+    public boolean existsTeacher(long teacher_id) {
         return getTeacherByID(teacher_id) != null;
     }
 }

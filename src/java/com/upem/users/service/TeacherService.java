@@ -49,7 +49,7 @@ public class TeacherService {
     }
 
     @WebMethod(operationName = "getTeacherByID")
-    public Teacher getTeacherByID(@WebParam(name = "teacher_id") int teacher_id) {
+    public Teacher getTeacherByID(@WebParam(name = "teacher_id") long teacher_id) {
         return ejbRef.getTeacherByID(teacher_id);
     }
 
@@ -59,7 +59,7 @@ public class TeacherService {
     }
 
     @WebMethod(operationName = "existsTeacher")
-    public boolean existsTeacher(@WebParam(name = "teacher_id") int teacher_id) {
+    public boolean existsTeacher(@WebParam(name = "teacher_id") long teacher_id) {
         return ejbRef.existsTeacher(teacher_id);
     }
     
