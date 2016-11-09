@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
@@ -15,6 +16,14 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputLabel value="Bank Account Owner" for="userBankAccounts" />
+                    <p:selectOneMenu required="true" id="userBankAccounts" value="#{studentController.selected.iban}" converter="compteConverter" panelStyle="width:180px"
+                                     effect="fade" var="t" style="width:160px" filter="true" filterMatchMode="startsWith">
+                        <f:selectItems value="#{studentController.bankAccounts}" var="compte" itemLabel="#{compte.ownerLastName} #{compte.ownerFirstName}" itemValue="#{compte}" />
+                        <p:column>
+                            <h:outputText value="#{t.ownerLastName} #{t.ownerFirstName}" />
+                        </p:column>
+                    </p:selectOneMenu>
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_type}" for="type" />
                     <h:inputText id="type" value="#{studentController.selected.type}" title="#{bundleStudents.EditStudentTitle_type}" />
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_id}" for="id" />

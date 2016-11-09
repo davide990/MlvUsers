@@ -29,6 +29,8 @@
                     <h:outputText value="#{studentController.selected.birth_date}" title="#{bundleStudents.ViewStudentTitle_birth_date}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText>
+                    <h:outputText value="IBAN"/>
+                    <h:outputText value="#{studentController.selected.iban}" title="IBAN: "/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{studentController.destroyAndView}" value="#{bundleStudents.ViewStudentDestroyLink}"/>

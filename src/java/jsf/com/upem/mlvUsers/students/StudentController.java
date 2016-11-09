@@ -1,11 +1,15 @@
 package jsf.com.upem.mlvUsers.students;
 
+import com.upem.bank.service.Compte;
 import com.upem.users.entities.Student;
+import com.upem.users.service.bank.binding.Compte_;
+import com.upem.users.service.bank.client.BankServiceClient;
 import jsf.com.upem.mlvUsers.students.util.JsfUtil;
 import jsf.com.upem.mlvUsers.students.util.PaginationHelper;
 import jpa.com.upem.mlvUsers.students.StudentFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -29,6 +33,8 @@ public class StudentController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    private List<Compte_> bankAccounts;
+
     public StudentController() {
     }
 
@@ -38,6 +44,14 @@ public class StudentController implements Serializable {
             selectedItemIndex = -1;
         }
         return current;
+    }
+
+    public List<Compte_> getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public void setBankAccounts(List<Compte_> bankAccounts) {
+        this.bankAccounts = bankAccounts;
     }
 
     private StudentFacade getFacade() {
@@ -75,6 +89,9 @@ public class StudentController implements Serializable {
 
     public String prepareCreate() {
         current = new Student();
+
+        bankAccounts = BankServiceClient.getAllBankAccount();
+
         selectedItemIndex = -1;
         return "Create";
     }
@@ -92,6 +109,7 @@ public class StudentController implements Serializable {
 
     public String prepareEdit() {
         current = (Student) getItems().getRowData();
+        bankAccounts = BankServiceClient.getAllBankAccount();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -138,6 +156,10 @@ public class StudentController implements Serializable {
         }
     }
 
+    public String getStudentIBAN(String studentIBAN) {
+        return BankServiceClient.getAccountByIBAN(studentIBAN).getIban();
+    }
+    
     private void updateCurrentItem() {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {

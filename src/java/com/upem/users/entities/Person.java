@@ -51,6 +51,17 @@ public abstract class Person implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birth_date;
 
+    @Column(name = "iban")
+    private String iban;
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
     public long getId() {
         return id;
     }
