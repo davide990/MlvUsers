@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
@@ -19,46 +20,52 @@
                     <h:outputText value="#{teacherController.pagination.pageFirstItem + 1}..#{teacherController.pagination.pageLastItem + 1}/#{teacherController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{teacherController.previous}" value="#{bundleTeachers.Previous} #{teacherController.pagination.pageSize}" rendered="#{teacherController.pagination.hasPreviousPage}"/>&nbsp;
                     <h:commandLink action="#{teacherController.next}" value="#{bundleTeachers.Next} #{teacherController.pagination.pageSize}" rendered="#{teacherController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{teacherController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
+                    <p:dataTable value="#{teacherController.items}" var="item" style="border:solid 1px">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleTeachers.ListTeacherTitle_type}"/>
                             </f:facet>
                             <h:outputText value="#{item.type}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleTeachers.ListTeacherTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleTeachers.ListTeacherTitle_first_name}"/>
                             </f:facet>
                             <h:outputText value="#{item.first_name}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleTeachers.ListTeacherTitle_last_name}"/>
                             </f:facet>
                             <h:outputText value="#{item.last_name}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleTeachers.ListTeacherTitle_email}"/>
                             </f:facet>
                             <h:outputText value="#{item.email}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundleTeachers.ListTeacherTitle_birth_date}"/>
                             </f:facet>
                             <h:outputText value="#{item.birth_date}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="IBAN"/>
+                            </f:facet>
+                            <h:outputText value="#{item.iban}"/>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
@@ -67,8 +74,8 @@
                             <h:commandLink action="#{teacherController.prepareEdit}" value="#{bundleTeachers.ListTeacherEditLink}"/>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{teacherController.destroy}" value="#{bundleTeachers.ListTeacherDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
+                        </p:column>
+                    </p:dataTable>
                 </h:panelGroup>
                 <br />
                 <h:commandLink action="#{teacherController.prepareCreate}" value="#{bundleTeachers.ListTeacherCreateLink}"/>

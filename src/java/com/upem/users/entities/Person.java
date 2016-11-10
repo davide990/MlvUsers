@@ -36,7 +36,7 @@ public abstract class Person implements Serializable {
     @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "first_name")
     private String first_name;
@@ -62,11 +62,11 @@ public abstract class Person implements Serializable {
         this.iban = iban;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

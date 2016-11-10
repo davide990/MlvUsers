@@ -8,16 +8,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 
 /**
  *
@@ -83,7 +79,7 @@ public class StudentDAO {
 
     }
 
-    public Student getStudentByID(long student_id) {
+    public Student getStudentByID(int student_id) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Person> person = builder.createQuery(Person.class);
 
@@ -96,7 +92,13 @@ public class StudentDAO {
 
         person.select(personRoot).where(pd_3);
         TypedQuery<Person> pp = em.createQuery(person);
-        return (Student) pp.getSingleResult();
+
+        try {
+            return (Student) pp.getSingleResult();
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "No student found with ID #" + student_id);
+            return null;
+        }
     }
 
     public Student getStudentByEmail(String email) {
@@ -112,10 +114,15 @@ public class StudentDAO {
 
         person.select(personRoot).where(pd_3);
         TypedQuery<Person> pp = em.createQuery(person);
-        return (Student) pp.getSingleResult();
+        try {
+            return (Student) pp.getSingleResult();
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "No student found with email [" + email + "}");
+            return null;
+        }
     }
 
-    public boolean existsStudent(long student_id) {
+    public boolean existsStudent(int student_id) {
         return getStudentByID(student_id) != null;
     }
 

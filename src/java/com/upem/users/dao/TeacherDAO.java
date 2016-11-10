@@ -79,7 +79,7 @@ public class TeacherDAO {
         return sl;
     }
 
-    public Teacher getTeacherByID(long teacher_id) {
+    public Teacher getTeacherByID(int teacher_id) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<Person> person = builder.createQuery(Person.class);
 
@@ -92,7 +92,12 @@ public class TeacherDAO {
 
         person.select(personRoot).where(pd_3);
         TypedQuery<Person> pp = em.createQuery(person);
-        return (Teacher) pp.getSingleResult();
+        try {
+            return (Teacher) pp.getSingleResult();
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "No teacher found with ID #" + teacher_id);
+            return null;
+        }
     }
 
     public Teacher getTeacherByEmail(String email) {
@@ -108,10 +113,17 @@ public class TeacherDAO {
 
         person.select(personRoot).where(pd_3);
         TypedQuery<Person> pp = em.createQuery(person);
-        return (Teacher) pp.getSingleResult();
+
+        try {
+            return (Teacher) pp.getSingleResult();
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "No student found with email [" + email + "]");
+            return null;
+        }
+
     }
 
-    public boolean existsTeacher(long teacher_id) {
+    public boolean existsTeacher(int teacher_id) {
         return getTeacherByID(teacher_id) != null;
     }
 }

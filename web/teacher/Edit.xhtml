@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template.xhtml">
@@ -14,7 +15,15 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Bank Account Owner" for="userBankAccounts" />
+                    <p:selectOneMenu required="true" id="userBankAccounts" value="#{teacherController.selected.iban}" converter="compteConverter" panelStyle="width:180px"
+                                     effect="fade" var="t" style="width:160px" filter="true" filterMatchMode="startsWith">
+                        <f:selectItems value="#{teacherController.bankAccounts}" var="compte" itemLabel="#{compte.ownerLastName} #{compte.ownerFirstName}" itemValue="#{compte}" />
+                        <p:column>
+                            <h:outputText value="#{t.ownerLastName} #{t.ownerFirstName}" />
+                        </p:column>
+                    </p:selectOneMenu>
                     <h:outputLabel value="#{bundleTeachers.EditTeacherLabel_type}" for="type" />
                     <h:inputText id="type" value="#{teacherController.selected.type}" title="#{bundleTeachers.EditTeacherTitle_type}" />
                     <h:outputLabel value="#{bundleTeachers.EditTeacherLabel_id}" for="id" />
@@ -29,7 +38,7 @@
                     <h:inputText id="birth_date" value="#{teacherController.selected.birth_date}" title="#{bundleTeachers.EditTeacherTitle_birth_date}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
-                </h:panelGrid>
+                </p:panelGrid>
                 <h:commandLink action="#{teacherController.update}" value="#{bundleTeachers.EditTeacherSaveLink}"/>
                 <br />
                 <br />

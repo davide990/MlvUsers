@@ -16,6 +16,14 @@
             </h:panelGroup>
             <h:form>
                 <p:panelGrid columns="2">
+                    <h:outputLabel value="Bank Account Owner" for="userBankAccounts" />
+                    <p:selectOneMenu required="true" id="userBankAccounts" value="#{teacherController.selected.iban}" converter="compteConverter" panelStyle="width:180px"
+                                     effect="fade" var="t" style="width:160px" filter="true" filterMatchMode="startsWith">
+                        <f:selectItems value="#{teacherController.bankAccounts}" var="compte" itemLabel="#{compte.ownerLastName} #{compte.ownerFirstName}" itemValue="#{compte}" />
+                        <p:column>
+                            <h:outputText value="#{t.ownerLastName} #{t.ownerFirstName}" />
+                        </p:column>
+                    </p:selectOneMenu>
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_first_name}" for="first_name" />
                     <h:inputText id="first_name" value="#{teacherController.selected.first_name}" title="#{bundleTeachers.CreateTeacherTitle_first_name}" />
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_last_name}" for="last_name" />

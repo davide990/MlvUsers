@@ -2,6 +2,8 @@ package com.upem.users.service;
 
 import com.upem.users.dao.StudentDAO;
 import com.upem.users.entities.Student;
+import com.upem.users.service.bank.binding.Compte_;
+import com.upem.users.service.bank.client.BankServiceClient;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.Oneway;
@@ -43,7 +45,7 @@ public class StudentService {
     }
 
     @WebMethod(operationName = "getStudentByID")
-    public Student getStudentByID(@WebParam(name = "student_id") long student_id) {
+    public Student getStudentByID(@WebParam(name = "student_id") int student_id) {
         return ejbRef.getStudentByID(student_id);
     }
 
@@ -53,8 +55,25 @@ public class StudentService {
     }
 
     @WebMethod(operationName = "existsStudent")
-    public boolean existsStudent(@WebParam(name = "student_id") long student_id) {
+    public boolean existsStudent(@WebParam(name = "student_id") int student_id) {
         return ejbRef.existsStudent(student_id);
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "studentHasEnoughMoney")
+    public Boolean studentHasEnoughMoney(@WebParam(name = "student_id") int student_id,
+            @WebParam(name = "purchase_amount") int purchase_amount) {
+
+        String iban = ejbRef.getStudentByID(student_id).getIban();
+        Compte_ compte = BankServiceClient.getAccountByIBAN(iban);
+
+        if (compte == null) {
+            return false;
+        }
+
+        return compte.getAmount() >= purchase_amount;
     }
 
 }

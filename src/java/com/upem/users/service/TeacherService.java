@@ -7,6 +7,8 @@ package com.upem.users.service;
 
 import com.upem.users.dao.TeacherDAO;
 import com.upem.users.entities.Teacher;
+import com.upem.users.service.bank.binding.Compte_;
+import com.upem.users.service.bank.client.BankServiceClient;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.Oneway;
@@ -49,7 +51,7 @@ public class TeacherService {
     }
 
     @WebMethod(operationName = "getTeacherByID")
-    public Teacher getTeacherByID(@WebParam(name = "teacher_id") long teacher_id) {
+    public Teacher getTeacherByID(@WebParam(name = "teacher_id") int teacher_id) {
         return ejbRef.getTeacherByID(teacher_id);
     }
 
@@ -59,8 +61,25 @@ public class TeacherService {
     }
 
     @WebMethod(operationName = "existsTeacher")
-    public boolean existsTeacher(@WebParam(name = "teacher_id") long teacher_id) {
+    public boolean existsTeacher(@WebParam(name = "teacher_id") int teacher_id) {
         return ejbRef.existsTeacher(teacher_id);
     }
-    
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "teacherHasEnoughMoney")
+    public Boolean teacherHasEnoughMoney(@WebParam(name = "teacher_id") int teacher_id,
+            @WebParam(name = "purchase_amount") int purchase_amount) {
+
+        String iban = ejbRef.getTeacherByID(teacher_id).getIban();
+        Compte_ compte = BankServiceClient.getAccountByIBAN(iban);
+
+        if (compte == null) {
+            return false;
+        }
+
+        return compte.getAmount() >= purchase_amount;
+    }
+
 }

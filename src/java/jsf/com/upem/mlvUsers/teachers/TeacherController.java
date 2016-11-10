@@ -1,11 +1,14 @@
 package jsf.com.upem.mlvUsers.teachers;
 
 import com.upem.users.entities.Teacher;
+import com.upem.users.service.bank.binding.Compte_;
+import com.upem.users.service.bank.client.BankServiceClient;
 import jsf.com.upem.mlvUsers.teachers.util.JsfUtil;
 import jsf.com.upem.mlvUsers.teachers.util.PaginationHelper;
 import jpa.com.upem.mlvUsers.teachers.TeacherFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -29,7 +32,17 @@ public class TeacherController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    private List<Compte_> bankAccounts;
+
     public TeacherController() {
+    }
+
+    public List<Compte_> getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public void setBankAccounts(List<Compte_> bankAccounts) {
+        this.bankAccounts = bankAccounts;
     }
 
     public Teacher getSelected() {
@@ -75,6 +88,7 @@ public class TeacherController implements Serializable {
 
     public String prepareCreate() {
         current = new Teacher();
+        bankAccounts = BankServiceClient.getAllBankAccount();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -92,6 +106,7 @@ public class TeacherController implements Serializable {
 
     public String prepareEdit() {
         current = (Teacher) getItems().getRowData();
+        bankAccounts = BankServiceClient.getAllBankAccount();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }

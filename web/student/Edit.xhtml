@@ -15,7 +15,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
+                <p:panelGrid columns="2">
                     <h:outputLabel value="Bank Account Owner" for="userBankAccounts" />
                     <p:selectOneMenu required="true" id="userBankAccounts" value="#{studentController.selected.iban}" converter="compteConverter" panelStyle="width:180px"
                                      effect="fade" var="t" style="width:160px" filter="true" filterMatchMode="startsWith">
@@ -38,7 +38,7 @@
                     <h:inputText id="birth_date" value="#{studentController.selected.birth_date}" title="#{bundleStudents.EditStudentTitle_birth_date}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
-                </h:panelGrid>
+                </p:panelGrid>
                 <h:commandLink action="#{studentController.update}" value="#{bundleStudents.EditStudentSaveLink}"/>
                 <br />
                 <br />

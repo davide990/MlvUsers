@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://services.mlvBank.upem.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="BankService" targetNamespace="http://services.mlvBank.upem.com/">
   <wsdl:types>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.mlvBank.upem.com/" elementFormDefault="unqualified" targetNamespace="http://services.mlvBank.upem.com/" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://services.mlvBank.upem.com/" targetNamespace="http://services.mlvBank.upem.com/" version="1.0">
 
   <xs:element name="compte" type="tns:compte"/>
 
@@ -32,13 +32,13 @@
 
   <xs:complexType name="enableAccount">
     <xs:sequence>
-      <xs:element minOccurs="0" name="accountID" type="xs:string"/>
+      <xs:element minOccurs="0" name="iban" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="disbleAccount">
     <xs:sequence>
-      <xs:element minOccurs="0" name="accountID" type="xs:string"/>
+      <xs:element minOccurs="0" name="iban" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -78,23 +78,21 @@
 
   <xs:complexType name="depositMoneyTo">
     <xs:sequence>
-      <xs:element minOccurs="0" name="accountID" type="xs:string"/>
-      <xs:element minOccurs="0" name="accountPSW" type="xs:string"/>
+      <xs:element minOccurs="0" name="iban" type="xs:string"/>
       <xs:element name="amount" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="withdrawMoneyFrom">
     <xs:sequence>
-      <xs:element minOccurs="0" name="accountID" type="xs:string"/>
-      <xs:element minOccurs="0" name="accountPSW" type="xs:string"/>
+      <xs:element minOccurs="0" name="iban" type="xs:string"/>
       <xs:element name="amount" type="xs:int"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="getCompteBy">
     <xs:sequence>
-      <xs:element minOccurs="0" name="accountID" type="xs:string"/>
+      <xs:element minOccurs="0" name="iban" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -112,8 +110,7 @@
 
   <xs:complexType name="getAccountState">
     <xs:sequence>
-      <xs:element minOccurs="0" name="accountID" type="xs:string"/>
-      <xs:element minOccurs="0" name="accountPSW" type="xs:string"/>
+      <xs:element minOccurs="0" name="iban" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 
