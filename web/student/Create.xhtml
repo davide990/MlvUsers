@@ -25,22 +25,22 @@
                         </p:column>
                     </p:selectOneMenu>
                     <h:outputLabel value="#{bundleStudents.CreateStudentLabel_first_name}" for="first_name" />
-                    <h:inputText id="first_name" value="#{studentController.selected.first_name}" title="#{bundleStudents.CreateStudentTitle_first_name}" />
+                    <p:inputText id="first_name" value="#{studentController.selected.first_name}" title="#{bundleStudents.CreateStudentTitle_first_name}" />
                     <h:outputLabel value="#{bundleStudents.CreateStudentLabel_last_name}" for="last_name" />
-                    <h:inputText id="last_name" value="#{studentController.selected.last_name}" title="#{bundleStudents.CreateStudentTitle_last_name}" />
+                    <p:inputText id="last_name" value="#{studentController.selected.last_name}" title="#{bundleStudents.CreateStudentTitle_last_name}" />
                     <h:outputLabel value="#{bundleStudents.CreateStudentLabel_email}" for="email" />
-                    <h:inputText id="email" value="#{studentController.selected.email}" title="#{bundleStudents.CreateStudentTitle_email}" />
+                    <p:inputText id="email" value="#{studentController.selected.email}" title="#{bundleStudents.CreateStudentTitle_email}" />
                     <h:outputLabel value="#{bundleStudents.CreateStudentLabel_birth_date}" for="birth_date" />
                     <p:calendar  id="birth_date" value="#{studentController.selected.birth_date}" showOn="button" title="#{bundleStudents.CreateStudentTitle_birth_date}"/>
                 </p:panelGrid>
                 <br />
-                <h:commandLink action="#{studentController.create}" value="#{bundleStudents.CreateStudentSaveLink}" />
+                <p:commandButton ajax="false" action="#{studentController.create}" value="#{bundleStudents.CreateStudentSaveLink}" />
                 <br />
                 <br />
-                <h:commandLink action="#{studentController.prepareList}" value="#{bundleStudents.CreateStudentShowAllLink}" immediate="true"/>
+                <p:commandButton ajax="false" action="#{studentController.prepareList}" value="#{bundleStudents.CreateStudentShowAllLink}"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundleStudents.CreateStudentIndexLink}"/>
+                <p:button outcome="/index" value="#{bundleStudents.CreateStudentIndexLink}"/>
             </h:form>
         </ui:define>
     </ui:composition>

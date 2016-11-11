@@ -34,18 +34,17 @@
                     <h:outputText value="#{teacherController.selected.iban}" title="IBAN: "/>
                 </p:panelGrid>
                 <br />
-                <h:commandLink action="#{teacherController.destroyAndView}" value="#{bundleTeachers.ViewTeacherDestroyLink}"/>
+                <p:commandButton ajax="false" action="#{teacherController.destroyAndView}" value="#{bundleTeachers.ViewTeacherDestroyLink}"/>
                 <br />
                 <br />
-                <h:link outcome="Edit" value="#{bundleTeachers.ViewTeacherEditLink}"/>
+                <p:button outcome="Edit" value="#{bundleTeachers.ViewTeacherEditLink}"/>
                 <br />
-                <h:commandLink action="#{teacherController.prepareCreate}" value="#{bundleTeachers.ViewTeacherCreateLink}" />
+                <p:commandButton ajax="false" action="#{teacherController.prepareCreate}" value="#{bundleTeachers.ViewTeacherCreateLink}" />
                 <br />
-                <h:commandLink action="#{teacherController.prepareList}" value="#{bundleTeachers.ViewTeacherShowAllLink}"/>
+                <p:commandButton ajax="false" action="#{teacherController.prepareList}" value="#{bundleTeachers.ViewTeacherShowAllLink}"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundleTeachers.ViewTeacherIndexLink}"/>
-
+                <p:button outcome="/index" value="#{bundleTeachers.ViewTeacherIndexLink}"/>
             </h:form>
         </ui:define>
     </ui:composition>

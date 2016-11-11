@@ -24,30 +24,28 @@
                             <h:outputText value="#{t.ownerLastName} #{t.ownerFirstName}" />
                         </p:column>
                     </p:selectOneMenu>
-                    <h:outputLabel value="#{bundleStudents.EditStudentLabel_type}" for="type" />
-                    <h:inputText id="type" value="#{studentController.selected.type}" title="#{bundleStudents.EditStudentTitle_type}" />
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{studentController.selected.id}" title="#{bundleStudents.EditStudentTitle_id}" required="true" requiredMessage="#{bundleStudents.EditStudentRequiredMessage_id}"/>
+                    <p:inputText id="id" value="#{studentController.selected.id}" title="#{bundleStudents.EditStudentTitle_id}" required="true" requiredMessage="#{bundleStudents.EditStudentRequiredMessage_id}"/>
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_first_name}" for="first_name" />
-                    <h:inputText id="first_name" value="#{studentController.selected.first_name}" title="#{bundleStudents.EditStudentTitle_first_name}" />
+                    <p:inputText id="first_name" value="#{studentController.selected.first_name}" title="#{bundleStudents.EditStudentTitle_first_name}" />
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_last_name}" for="last_name" />
-                    <h:inputText id="last_name" value="#{studentController.selected.last_name}" title="#{bundleStudents.EditStudentTitle_last_name}" />
+                    <p:inputText id="last_name" value="#{studentController.selected.last_name}" title="#{bundleStudents.EditStudentTitle_last_name}" />
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_email}" for="email" />
-                    <h:inputText id="email" value="#{studentController.selected.email}" title="#{bundleStudents.EditStudentTitle_email}" />
+                    <p:inputText id="email" value="#{studentController.selected.email}" title="#{bundleStudents.EditStudentTitle_email}" />
                     <h:outputLabel value="#{bundleStudents.EditStudentLabel_birth_date}" for="birth_date" />
-                    <h:inputText id="birth_date" value="#{studentController.selected.birth_date}" title="#{bundleStudents.EditStudentTitle_birth_date}" >
+                    <p:inputText id="birth_date" value="#{studentController.selected.birth_date}" title="#{bundleStudents.EditStudentTitle_birth_date}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
+                    </p:inputText>
                 </p:panelGrid>
-                <h:commandLink action="#{studentController.update}" value="#{bundleStudents.EditStudentSaveLink}"/>
+                <p:commandButton ajax="false" action="#{studentController.update}" value="#{bundleStudents.EditStudentSaveLink}"/>
                 <br />
                 <br />
-                <h:link outcome="View" value="#{bundleStudents.EditStudentViewLink}"/>
+                <p:button outcome="View" value="#{bundleStudents.EditStudentViewLink}"/>
                 <br />
-                <h:commandLink action="#{studentController.prepareList}" value="#{bundleStudents.EditStudentShowAllLink}" immediate="true"/>
+                <p:commandButton ajax="false" action="#{studentController.prepareList}" value="#{bundleStudents.EditStudentShowAllLink}"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundleStudents.EditStudentIndexLink}" />
+                <p:button outcome="/index" value="#{bundleStudents.EditStudentIndexLink}" />
             </h:form>
         </ui:define>
     </ui:composition>

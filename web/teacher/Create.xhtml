@@ -25,22 +25,22 @@
                         </p:column>
                     </p:selectOneMenu>
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_first_name}" for="first_name" />
-                    <h:inputText id="first_name" value="#{teacherController.selected.first_name}" title="#{bundleTeachers.CreateTeacherTitle_first_name}" />
+                    <p:inputText id="first_name" value="#{teacherController.selected.first_name}" title="#{bundleTeachers.CreateTeacherTitle_first_name}" />
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_last_name}" for="last_name" />
-                    <h:inputText id="last_name" value="#{teacherController.selected.last_name}" title="#{bundleTeachers.CreateTeacherTitle_last_name}" />
+                    <p:inputText id="last_name" value="#{teacherController.selected.last_name}" title="#{bundleTeachers.CreateTeacherTitle_last_name}" />
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_email}" for="email" />
-                    <h:inputText id="email" value="#{teacherController.selected.email}" title="#{bundleTeachers.CreateTeacherTitle_email}" />
+                    <p:inputText id="email" value="#{teacherController.selected.email}" title="#{bundleTeachers.CreateTeacherTitle_email}" />
                     <h:outputLabel value="#{bundleTeachers.CreateTeacherLabel_birth_date}" for="birth_date" />
                     <p:calendar  id="birth_date" value="#{teacherController.selected.birth_date}" showOn="button" title="#{bundleTeachers.CreateTeacherTitle_birth_date}"/>
                 </p:panelGrid>
                 <br />
-                <h:commandLink action="#{teacherController.create}" value="#{bundleTeachers.CreateTeacherSaveLink}" />
+                <p:commandButton ajax="false" action="#{teacherController.create}" value="#{bundleTeachers.CreateTeacherSaveLink}" />
                 <br />
                 <br />
-                <h:commandLink action="#{teacherController.prepareList}" value="#{bundleTeachers.CreateTeacherShowAllLink}" immediate="true"/>
+                <p:commandButton ajax="false" action="#{teacherController.prepareList}" value="#{bundleTeachers.CreateTeacherShowAllLink}" />
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundleTeachers.CreateTeacherIndexLink}"/>
+                <p:button outcome="/index" value="#{bundleTeachers.CreateTeacherIndexLink}"/>
             </h:form>
         </ui:define>
     </ui:composition>

@@ -78,10 +78,10 @@
                     </p:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{studentController.prepareCreate}" value="#{bundleStudents.ListStudentCreateLink}"/>
+                <p:commandButton ajax="false" action="#{studentController.prepareCreate}" value="#{bundleStudents.ListStudentCreateLink}"/>
                 <br />
                 <br />
-                <h:link outcome="/index" value="#{bundleStudents.ListStudentIndexLink}"/>
+                <p:button outcome="/index" value="#{bundleStudents.ListStudentIndexLink}"/>
             </h:form>
         </ui:define>
     </ui:composition>
